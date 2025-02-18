@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:cursor_driven_flutter_sample/entity/foo.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:riverpod/riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'foo_repository.g.dart';
