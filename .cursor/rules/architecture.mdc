@@ -1,4 +1,31 @@
 ---
-description: 
-globs: 
+description: 全体のアーキテクチャ
+globs: lib/**/*.dart
 ---
+# アーキテクチャ
+
+## エントリポイント
+
+- [main.dart](mdc:lib/main.dart) がエントリポイントです。
+- `MainApp` の ListView に画面遷移先の一覧を表示します。
+
+## エンティティ
+
+- `lib/entity/**` にエンティティを定義します。
+- 実装方法は [entity.mdc](mdc:.cursor/rules/entity.mdc) に従います。
+
+## ロジック
+
+- `lib/logic/**` に業務ロジックに必要なデータの読み書きや計算を実装します。
+- 実装方法は [logic.mdc](mdc:.cursor/rules/logic.mdc) に従います。
+
+## リポジトリ
+
+- `lib/repository/**` にサーバサイドとの通信を実装します。
+- 実装方法は [repository.mdc](mdc:.cursor/rules/repository.mdc) に従います。
+
+## UI
+
+- `lib/ui/**` にページおよび、UI の体験を実装します。
+- 実装方法は [foos_page.dart](mdc:lib/ui/foos_page.dart) を参考にします。
+

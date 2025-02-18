@@ -1,0 +1,66 @@
+---
+description: Repository の実装
+globs: lib/repository/**/*_repository.dart
+---
+# repository
+
+## repository の実装
+
+repository の実装は以下のサンプルコードに従います。
+
+- http パッケージを利用して、HTTP リクエストを行います。
+- `lib/entity/**` のエンティティを利用して、`fromJson` でエンティティを返します。
+
+```dart
+import 'dart:convert';
+
+import 'package:cursor_driven_flutter_sample/entity/foo.dart';
+import 'package:http/http.dart' as http;
+import 'package:riverpod/riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'foo_repository.g.dart';
+
+/// [FooRepository] クラスのインスタンスを提供する。
+@riverpod
+FooRepository fooRepository(Ref ref) => FooRepository();
+
+/// [Foo] の通信を行うためのリポジトリ。
+class FooRepository {
+  /// [Foo] の通信を行うためのリポジトリを生成する。
+  const FooRepository();
+
+  /// [Foo] 一覧を取得する。
+  Future<List<Foo>> fetchFoos() async {
+    final url = Uri.https('example.com', '/foo');
+    final response = await http.get(url);
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    return json['foos'].map(Foo.fromJson).toList();
+  }
+
+  /// 指定した [Foo] を取得する。
+  Future<Foo> fetchFoo(String id) async {
+    final url = Uri.https('example.com', '/foo/$id');
+    final response = await http.get(url);
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    return Foo.fromJson(json);
+  }
+
+  /// [Foo] を作成する。
+  Future<Foo> createFoo(Foo foo) async {
+    final url = Uri.https('example.com', '/foo');
+    final response = await http.post(url, body: jsonEncode(foo.toJson()));
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    return Foo.fromJson(json);
+  }
+}
+```

@@ -1,0 +1,28 @@
+---
+description: Entity の実装
+globs: lib/entity/**/*.dart
+---
+# entity
+
+## entity の実装
+
+entity の実装は以下のサンプルコードに従います。
+
+UI, logic, repository から参照されて利用されます。
+
+```dart
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'foo.freezed.dart';
+part 'foo.g.dart';
+
+@freezed
+class Foo with _$Foo {
+  const factory Foo({
+    required String someField,
+    @Default([]) List<String> things,
+  }) = _Foo;
+
+  factory Foo.fromJson(Map<String, dynamic> json) => _$FooFromJson(json);
+}
+```

@@ -32,7 +32,7 @@
     "source.organizeImports": "explicit",
     "quickfix.insertSemicolon": "explicit"
   },
-  "cSpell.words": [],
+  "cSpell.words": ["foos"],
   "cSpell.ignorePaths": [
     "**/.vscode/**",
     "**/fvm/**",
